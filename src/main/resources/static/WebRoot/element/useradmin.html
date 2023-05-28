@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+<div id="app">
+    <el-container style="height: 800px; border: 1px solid #eee">
+        <el-sider>
+            <el-row class="tac">
+                <el-col :span="12">
+                    <el-menu
+                            default-active="2"
+                            class="el-menu-vertical-demo"
+                            @open="handleOpen"
+                            @close="handleClose">
+                        <el-button type="primary" icon="el-icon-position" disabled>菜单</el-button>
+                        <el-menu-item index="1-1">
+                            <el-link href="https://element.eleme.io" target="_blank">默认链接</el-link>
+                        </el-menu-item>
+                        <el-menu-item index="1-1">
+                            <el-link href="https://element.eleme.io" target="_blank">默认链接</el-link>
+                        </el-menu-item>
+                        <el-menu-item index="1-1">
+                            <el-link href="https://element.eleme.io" target="_blank">默认链接</el-link>
+                        </el-menu-item>
+                        <el-menu-item index="1-1">
+                            <el-link href="https://element.eleme.io" target="_blank">默认链接</el-link>
+                        </el-menu-item>
+                        <el-menu-item index="1-1">
+                            <el-link href="https://element.eleme.io" target="_blank">默认链接</el-link>
+                        </el-menu-item>
+                        <el-menu-item index="1-1">
+                            <el-link href="https://element.eleme.io" target="_blank">默认链接</el-link>
+                        </el-menu-item>
+                        <el-menu-item index="1-1">
+                            <el-link href="https://element.eleme.io" target="_blank">默认链接</el-link>
+                        </el-menu-item>
+                        <el-menu-item index="1-1">
+                            <el-link href="https://element.eleme.io" target="_blank">默认链接</el-link>
+                        </el-menu-item>
+                        <el-menu-item index="1-1">
+                            <el-link href="https://element.eleme.io" target="_blank">默认链接</el-link>
+                        </el-menu-item>
+
+                    </el-menu>
+                </el-col>
+            </el-row>
+        </el-sider>
+        <el-container>
+            <el-header style="text-align: right; font-size: 15px ; background-color:rgb(238, 241, 246)">
+                <el-dropdown>
+                    <el-button @click="handleCreate()" class="dalfBut" style="width: 200px">新建用户</el-button>
+                    <el-button type="primary" icon="el-icon-s-tools" style="font-size: 10px">设置</el-button>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item>注销</el-dropdown-item>
+                        <el-dropdown-item>修改密码</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+                <i class="el-icon-user-solid"></i>
+                <span>梅西</span>
+            </el-header>
+
+            <el-input placeholder="名称" v-model="pagination.queryString" style="width: 200px;"
+                      class="filter-item"></el-input>
+            <el-button @click="getAll()" class="dalfBut" style="width: 200px">查询</el-button>
+            <el-table
+                    :data="dataList"
+                    style="width: 100%">
+                <el-table-column
+                        prop="userName"
+                        label="用户名"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="password"
+                        label="密码"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="status"
+                        label="人员">
+                </el-table-column>
+                <el-table-column label="操作">
+                    <template slot-scope="scope">
+                        <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>
+                        <el-button type="danger" size="mini" @click="handleDelete(scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <div class="add-form">
+
+                <el-dialog title="新建用户" :visible.sync="dialogFormVisible">
+
+                    <el-form ref="dataAddForm" :model="formData" :rules="rules" label-position="right"
+                             label-width="100px">
+
+                        <el-row>
+
+                            <el-col :span="12">
+
+                                <el-form-item label="姓名" prop="userName">
+
+                                    <el-input v-model="formData.usernName"/>
+
+                                </el-form-item>
+
+                            </el-col>
+                            <el-col :span="12">
+
+                                <el-form-item label="账户" prop="vipId">
+
+                                    <el-input v-model="formData.vipId"/>
+
+                                </el-form-item>
+
+                            </el-col>
+                            <el-col :span="12">
+
+                                <el-form-item label="密码" prop="password">
+
+                                    <el-input v-model="formData.password"/>
+
+                                </el-form-item>
+
+                            </el-col>
+
+                        </el-row>
+
+                        <el-row>
+                            职业
+                            <el-select prop="department" v-model="formData.status" placeholder="请选择">
+                                <el-option
+                                        v-for="item in options"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-row>
+                    </el-form>
+
+                            <div slot="footer" class="dialog-footer">
+
+                                <el-button @click="dialogFormVisible = false">取消</el-button>
+
+                                <el-button type="primary" @click="handleAdd()">确定</el-button>
+
+                            </div>
+
+                        </el-dialog>
+
+                    </div>
+                </el-dialog>
+
+                    <div class="tabListPage">
+                        <el-pagination @size-change="handleSizeChange"
+                                       @current-change="handleCurrentChange"
+                                       :current-page="currentPage"
+                                       :page-sizes="pageSizes"
+                                       :page-size="PageSize" layout="total, sizes, prev, pager, next, jumper"
+                                       :total="totalCount">
+                        </el-pagination>
+                    </div>
+
+        </el-container>
+    </el-container>
+
+    <style>
+        .el-header {
+            background-color: #B3C0D1;
+            color: #333;
+            line-height: 60px;
+        }
+
+        .el-aside {
+            color: #333;
+        }
+    </style>
+
+</div>
+
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+<script>
+    var vue = new Vue({
+
+        el: '#app',
+        data: {
+            // 默认显示第几页
+            currentPage: 1,
+            // 总条数，根据接口获取数据长度(注意：这里不能为空)
+            totalCount: 100,
+            // 个数选择器（可修改）
+            pageSizes: [1, 2, 3, 4],
+            // 默认每页显示的条数（可修改）
+            PageSize: 3,
+            pagination: {},
+            dataList: [],//当前页要展示的列表数据
+            formData: {},//表单数据
+            dialogFormVisible: false,//控制表单是否可见
+            dialogFormVisible4Edit: false,//编辑表单是否可见
+            rules: {//校验规则
+                // type: [{required: true, message: '为必填项', trigger: 'blur'}],
+                // name: [{required: true, message: '为必填项', trigger: 'blur'}]
+            },
+            options: [{
+                value: 0,
+                label: '管理员'
+            }, {
+                value: 1,
+                label: '用户'
+            }, {
+                value: 2,
+                label: '医生'
+            },],
+            value: ''
+        },
+
+        //钩子函数，VUE对象初始化完成后自动执行
+        created() {
+            this.getData();
+        },
+
+        methods: {
+            getData() {
+                axios.get("/users/" + this.currentPage + "/" + this.PageSize
+                ).then((res) => {
+                    // console.log(n1),
+                    //     console.log(n2)
+                    this.dataList = res.data.data.records
+                    console.log(res.data.data.records)
+                    // 将数据的长度赋值给totalCount
+                    this.totalCount = data.data.body.length
+                })
+            },
+            handleSizeChange(val) {
+                console.log(val)
+                // 改变每页显示的条数
+                this.PageSize = val
+                // 注意：在改变每页显示的条数时，要将页码显示到第一页
+                this.getData()
+            },
+            // 显示第几页
+            handleCurrentChange(val) {
+                // 改变默认的页数
+                this.currentPage = val
+                // 切换页码时，要获取每页显示的条数
+                this.getData(this.PageSize, (val) * (this.pageSize))
+                this.getData()
+            },
+            //弹出添加窗口
+            handleCreate() {
+                this.dialogFormVisible = true;
+                this.resetForm();
+            },
+
+            //重置表单
+            resetForm() {
+                this.formData = {};
+            },
+
+            //添加
+            handleAdd() {
+                //发送ajax请求
+                axios.post("/users/save", this.formData).then((res) => {
+                    //如果操作成功，关闭弹层,显示数据
+                    if (res.data.code == 1) {
+                        this.dialogFormVisible = false;
+                        this.$message.success("添加成功")
+                        this.getData();
+                    } else if (res.data.code == 0) {
+                        this.$message.error("添加失败")
+                    } else {
+                        this.$message.error(res.data.msg);
+
+                    }
+
+                }).finally(() => {
+                    this.getData();
+                });
+            },
+
+            //弹出编辑窗口
+            handleUpdate(row) {
+                //查询数据，根据id查询
+                axios.get("/users/" + row.id).then((res) => {
+                    if (res.data.code == 1) {
+                        this.formData = res.data.data;
+                        this.dialogFormVisible4Edit = true;
+                    } else {
+                        this.$message.error(res.data.msg)
+                    }
+                });
+                //展示弹层，加载数据
+            },
+
+            //编辑
+            handleEdit() {
+                axios.put("/users", this.formData).then((res) => {
+                    //如果操作成功，关闭弹层,显示数据
+                    if (res.data.code == 1) {
+                        this.dialogFormVisible4Edit = false;
+                        this.$message.success("修改成功")
+                        this.getAll();
+                    } else if (res.data.code == 0) {
+                        this.$message.error("修改失败")
+                    }
+
+                }).finally(() => {
+                    this.getData();
+                });
+
+            },
+
+            // 删除
+            handleDelete(row) {
+                //1.弹出提示框
+                this.$confirm("此操作永久删除当前数据，是否继续？", "提示", {
+                    type: 'info'
+                }).then(() => {
+                    //2.做删除业务
+                    axios.delete("/books/" + row.id).then((res) => {
+                        if (res.data.code == 1) {
+                            this.$message.success("删除成功");
+                        } else {
+                            this.$message.error("删除失败");
+                        }
+                    }).finally(() => {
+                        this.getAll();
+                    });
+                }).catch(() => {
+                    //3.取消删除
+                    this.$message.info("取消删除操作");
+                });
+            }
+        }
+    })
+
+
+</script>
+
+</html>

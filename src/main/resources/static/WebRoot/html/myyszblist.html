@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<link href="../images/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+function deletes(id){
+ window.location.href="myyszblist.html";
+}
+$(function(){
+	$('tbody tr:odd').addClass("trLight");
+	$(".select-all").click(function(){
+		if($(this).attr("checked")){
+			$(".checkBox input[type=checkbox]").each(function(){
+				$(this).attr("checked", true);  
+				});
+			}else{
+				$(".checkBox input[type=checkbox]").each(function(){
+				$(this).attr("checked", false);  
+				});
+			}
+		});
+	
+	});
+</script>
+<style type="text/css">
+body {
+	background:#FFF
+}
+</style>
+</head>
+<body>
+<div id="contentWrap">
+	<!--表格控件 -->
+  <div id="widget table-widget">
+    <div class="pageTitle">我的值班</div>
+    <div class="pageColumn">
+      <table>
+        <thead>
+          <th width="">id</th>
+          <th width="">日期</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>111111</td>
+            <td>2018-1-10</td>
+          </tr>
+          <tr>
+            <td>111111</td>
+            <td>2018-1-20</td>
+          </tr>
+          <tr>
+            <td>111111</td>
+            <td>2018-1-30</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!-- #widget -->
+</div>
+</body>
+</html>
+

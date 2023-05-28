@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('tbody tr:odd').addClass("trLight");
+		
+		$(".select-all").click(function(){
+			if($(this).attr("checked")){
+				$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", true);  
+					});
+				}else{
+					$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", false);  
+					});
+				}
+			});
+		
+		})
+</script>
+<style type="text/css">
+body {
+	background:#FFF
+}
+</style>
+</head>
+
+<body>
+ <form method="post" action="adminlist.html" method="post" name="ThisForm">
+  <input  type="hidden" id="id" name="id" value=""/>
+<div id="contentWrap">
+	<!--表格控件 -->
+  <div id="widget table-widget">
+    <div class="pageTitle">用户修改</div>
+    <div class="pageColumn">
+      <div class="pageButton"></div>
+      <table>
+        <thead>
+          <th width="">用户名</th>
+          <th width=""><input type="text" id="username" name="username" value="用户名" readonly="readonly"/></th>
+            </thead>
+            <thead>
+          <th width="">密码</th>
+          <th width=""><input type="text" id="password" name="password" value="密码"/></th>
+            </thead>
+            <thead>
+          <th width="">姓名</th>
+          <th width=""><input type="text" id="realname" name="realname" value="真实姓名"/></th>
+            </thead>
+             <thead>
+          <th width="">类型</th>
+          <th width="">
+          <select id="type" name="type">
+          <option value="">类型</option>      
+    		<option value="系统管理员">系统管理员</option>      
+    		<option value="医生">医生</option>   
+    		<option value="护士">护士</option>       
+          </select>
+          </th>
+            </thead>
+             <thead>
+          <th colspan="2"><input type="submit" value="确定"/> </th>
+            </thead>
+      </table>
+    </div>
+  </div><!-- #widget -->
+</div>
+
+</form>
+</body>
+</html>

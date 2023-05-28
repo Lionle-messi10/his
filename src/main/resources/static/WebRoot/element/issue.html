@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+<div id="app">
+  <el-container style="height: 800px; border: 1px solid #eee">
+    <el-sider>
+      <el-row class="tac">
+        <el-col :span="12">
+          <el-menu
+                  default-active="2"
+                  class="el-menu-vertical-demo"
+                  @open="handleOpen"
+                  @close="handleClose">
+            <el-button type="primary" icon="el-icon-position" disabled>菜单</el-button>
+            <el-menu-item index="1-1">
+              <el-link href="https://element.eleme.io" target="_blank">医生诊断管理</el-link>
+            </el-menu-item>
+            <el-menu-item index="1-1">
+              <el-link href="https://element.eleme.io" target="_blank">缴费信息查询</el-link>
+            </el-menu-item>
+            <el-menu-item index="1-1">
+              <el-link href="https://element.eleme.io" target="_blank">默认链接</el-link>
+            </el-menu-item>
+
+          </el-menu>
+        </el-col>
+      </el-row>
+    </el-sider>
+    <el-container>
+      <el-header style="text-align: right; font-size: 15px ; background-color:rgb(238, 241, 246)">
+        <el-dropdown>
+          <el-button type="primary" icon="el-icon-s-tools" style="font-size: 10px">设置</el-button>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item @click="loginOut()">注销</el-dropdown-item>
+            <el-dropdown-item>修改密码</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <i class="el-icon-user-solid"></i>
+        <span>梅西</span>
+      </el-header>
+      <el-table
+              :data="dataList"
+              style="width: 100%">
+        <el-table-column
+                prop="id"
+                label="序号"
+                width="180">
+        </el-table-column>
+        <el-table-column
+                prop="vipId"
+                label="诊断账号"
+                width="180">
+        </el-table-column>
+        <el-table-column
+                prop="prescription"
+                label="药方"
+                width="180">
+        </el-table-column>
+        <el-table-column
+                prop="num"
+                label="药品数量"
+                width="180">
+        </el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button type="primary" size="mini" @click="charge(scope.row)">放药</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="tabListPage">
+        <el-pagination @size-change="handleSizeChange"
+                       @current-change="handleCurrentChange"
+                       :current-page="currentPage"
+                       :page-sizes="pageSizes"
+                       :page-size="PageSize" layout="total, sizes, prev, pager, next, jumper"
+                       :total="totalCount">
+        </el-pagination>
+      </div>
+    </el-container>
+  </el-container>
+  <style>
+    .el-header {
+      background-color: #B3C0D1;
+      color: #333;
+      line-height: 60px;
+    }
+
+    .el-aside {
+      color: #333;
+    }
+  </style>
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+<script>
+  var vue = new Vue({
+
+    el: '#app',
+    data: {
+      // 默认显示第几页
+      currentPage: 1,
+      // 总条数，根据接口获取数据长度(注意：这里不能为空)
+      totalCount: 100,
+      // 个数选择器（可修改）
+      pageSizes: [1, 2, 3, 4],
+      // 默认每页显示的条数（可修改）
+      PageSize: 3,
+      pagination: {},
+      dataList: [],//当前页要展示的列表数据
+      formData: {},//表单数据
+      dialogFormVisible: false,//控制表单是否可见
+      dialogFormVisible4Edit: false,//编辑表单是否可见
+      dialogFormVisible2: false,
+      rules: {//校验规则
+        // type: [{required: true, message: '为必填项', trigger: 'blur'}],
+        // name: [{required: true, message: '为必填项', trigger: 'blur'}]
+      },
+    },
+
+    //钩子函数，VUE对象初始化完成后自动执行
+    created() {
+      this.getData()
+    },
+
+    methods: {
+      getData() {
+        axios.get("/doctor/issue/" + this.currentPage + "/" + this.PageSize
+        ).then((res) => {
+          this.dataList = res.data.data.records
+          console.log(res.data.data.records)
+          // 将数据的长度赋值给totalCount
+          this.totalCount = data.data.body.length
+        })
+      },
+      handleSizeChange(val) {
+        console.log(val)
+        // 改变每页显示的条数
+        this.PageSize = val
+        // 注意：在改变每页显示的条数时，要将页码显示到第一页
+        this.getData()
+      },
+      // 显示第几页
+      handleCurrentChange(val) {
+        // 改变默认的页数
+        this.currentPage = val
+        // 切换页码时，要获取每页显示的条数
+        this.getData(this.PageSize, (val) * (this.pageSize))
+        this.getData()
+      },
+      //弹出添加窗口
+      handleCreate() {
+        this.dialogFormVisible = true;
+        this.resetForm();
+      },
+      handleCreate2() {
+        this.dialogFormVisible2 = true;
+        this.resetForm();
+      },
+
+      handleUpdate(row) {
+        //查询数据，根据id查询
+        axios.get("/doctor/id/" + row.id).then((res) => {
+          if (res.data.code == 1) {
+            this.formData = res.data.data;
+            this.dialogFormVisible4Edit = true;
+          } else {
+            this.$message.error(res.data.msg)
+          }
+        });
+        //展示弹层，加载数据
+      },
+
+      //编辑
+      handleEdit() {
+        axios.put("/doctor", this.formData).then((res) => {
+          //如果操作成功，关闭弹层,显示数据
+          if (res.data.code == 1) {
+            this.dialogFormVisible4Edit = false;
+            this.$message.success("修改成功")
+            this.getData();
+          } else if (res.data.code == 0) {
+            this.$message.error("修改失败")
+          }
+
+        }).finally(() => {
+          this.getData();
+        });
+
+      },
+
+      //缴费
+      charge(row) {
+        //查询数据，根据id查询
+        axios.put("/drug/"+row.prescription+"/"+row.num).then((res) => {
+          if (res.data.code == 1) {
+            this.$message.success("发药成功")
+            this.handleDelete(row)
+          } else {
+            this.$message.error(res.data.msg)
+          }
+        });
+        //展示弹层，加载数据
+      },
+      handleDelete(row) {
+        axios.delete("/drug/" + row.id).then((res) => {
+        }).finally(() => {
+          this.getData();
+        });
+      },
+
+
+
+
+
+      //重置表单
+      resetForm() {
+        this.formData = {};
+      },
+      //添加
+      handleAdd2() {
+        // console.log("===========================")
+        // console.log(this.formData)
+        //发送ajax请求
+        axios.post("/doctor/save", this.formData).then((res) => {
+          console.log(this.formData)
+          //如果操作成功，关闭弹层,显示数据
+          if (res.data.code == 1) {
+            this.dialogFormVisible2 = false;
+            this.$message.success("添加成功")
+            this.getData();
+          } else if (res.data.code == 0) {
+            this.$message.error("添加失败")
+          } else {
+            this.$message.error(res.data.msg);
+
+          }
+
+        }).finally(() => {
+          this.getData();
+        });
+      },
+
+    }
+  })
+
+</script>
+
+</html>

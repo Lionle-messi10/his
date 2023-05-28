@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+
+function deletes(id,yzid){
+ window.location.href="kylist.html";
+}
+function ky(){
+// 	var yzid = '<%=yzid%>';
+	 window.location.href="yzkyadd.html";
+	}
+	$(function(){
+		$('tbody tr:odd').addClass("trLight");
+		
+		$(".select-all").click(function(){
+			if($(this).attr("checked")){
+				$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", true);  
+					});
+				}else{
+					$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", false);  
+					});
+				}
+			});
+		});
+</script>
+<script type="text/javascript">
+	function back(){
+// 	history.go(-1);
+		window.location.href="yzlist.html";
+	}
+	
+</script>
+<style type="text/css">
+body {
+	background:#FFF
+}
+</style>
+</head>
+<body>
+<div id="contentWrap">
+	<!--表格控件 -->
+  <div id="widget table-widget">
+    <div class="pageTitle">医生开药列表</div>
+    <div class="pageColumn">
+      <table>
+        <thead>
+          <th width="">挂号号</th>
+          <th width="">药品ID</th>
+          <th width="">药品名称</th>
+          <th width="">数量</th>
+          <th width="">描述</th>
+          <th width="10%">操作</th>
+        </thead>
+        <tbody>
+          <tr>
+          	<td>222222</td>
+            <td>123456</td>
+            <td>皮炎平</td>
+            <td>1</td>
+            <td>一天两片</td>
+            <td><a onclick="deletes(id)"><img src="../images/icon/del.png" width="16" height="16" /></a></td>
+          </tr>
+          <tr>
+          	<td>222222</td>
+            <td>123456</td>
+            <td>皮炎平</td>
+            <td>1</td>
+            <td>一天两片</td>
+            <td><a onclick="deletes(id)"><img src="../images/icon/del.png" width="16" height="16" /></a></td>
+          </tr>
+          <tr>
+          	<td>222222</td>
+            <td>123456</td>
+            <td>皮炎平</td>
+            <td>1</td>
+            <td>一天两片</td>
+            <td><a onclick="deletes(id)"><img src="../images/icon/del.png" width="16" height="16" /></a></td>
+          </tr>
+          <tr><td colspan="6"><input type="button" onclick="ky()" value="新增药品"/>&nbsp;<input type="button" value="返回" onclick="back()"/> </td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!-- #widget -->
+</div>
+</body>
+</html>
+

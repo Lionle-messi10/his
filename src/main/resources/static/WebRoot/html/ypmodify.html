@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('tbody tr:odd').addClass("trLight");
+		
+		$(".select-all").click(function(){
+			if($(this).attr("checked")){
+				$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", true);  
+					});
+				}else{
+					$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", false);  
+					});
+				}
+			});
+		});
+</script>
+<style type="text/css">
+body {
+	background:#FFF
+}
+</style>
+</head>
+
+<body>
+ <form method="post" action="ypmodify.html" method="post" name="ThisForm">
+ <input  type="hidden" id="id" name="id" value=""/>
+<div id="contentWrap">
+	<!--表格控件 -->
+  <div id="widget table-widget">
+    <div class="pageTitle">药品价格修改</div>
+    <div class="pageColumn">
+      <div class="pageButton"></div>
+      <table>
+             <thead>
+          <th width="">价格</th>
+           <th width=""><input type="text" id="moneys" name="moneys" value=""/></th>
+            </thead>
+            </thead>
+             <thead>
+          <th colspan="2"><input type="submit" value="确定"/> </th>
+            </thead>
+      </table>
+    </div>
+  </div><!-- #widget -->
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<link href="../css/select.css" rel="stylesheet" type="text/css" />
+<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/select-ui.min.js"></script>
+<script type="text/javascript">
+function deletes(id){
+ window.location.href="adminlist.html";
+}
+function modify(id){
+	 window.location.href="adminadd.html";
+	}
+	$(function(){
+		$('tbody tr:odd').addClass("trLight");
+		
+		$(".select-all").click(function(){
+			if($(this).attr("checked")){
+				$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", true);  
+					});
+				}else{
+					$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", false);  
+					});
+				}
+			});
+		
+		});
+</script>
+<style type="text/css">
+body {
+	background:#FFF
+}
+</style>
+</head>
+
+<body>
+<div id="contentWrap">
+	<!--表格控件 -->
+  <div id="widget table-widget">
+    <div class="pageTitle">用户管理</div>
+    <div class="querybody">
+	    <ul class="seachform">
+	    <li><label>用户ID</label><input name="" type="text" class="scinput" /></li>
+	    <li><label>用户名称</label><input name="" type="text" class="scinput" /></li>
+        <li><label>用户类型</label>  
+		    <select style="width:150px;height:32px;">
+		    	<option value="0">-请选择-</option>
+		   		<option value="1">管理人员</option>
+				<option value="2">会员</option>
+				<option value="3">服务台员工</option>
+				<option value="4">药剂师</option>
+		    </select>
+	    </li>
+	    <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+	    </ul>
+	</div>
+    <div class="pageColumn">
+      <div class="pageButton"><a href="adminAdd.html"><img src="../images/t01.png" title="新增"/></a><span>用户列表</span></div>
+      <table>
+        <thead>
+	          <th width="">用户ID</th>
+	          <th width="">用户名</th>
+	          <th width="">密码</th>
+	          <th width="">姓名</th>
+	          <th width="">用户类型</th>
+	          <th width="">联系电话</th>
+	          <th width="">年龄</th>
+	          <th width="">家庭住址</th>
+	          <th width="10%">操作</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>111111</td>
+            <td>zhouyi</td>
+            <td>111111</td>
+            <td>周一</td>
+            <td>管理人员</td>
+            <td>111111</td>
+            <td>45</td>
+            <td>山东济南历下区</td>
+            <td> 
+            <a onclick="modify(id)"><img src="../images/icon/edit.png" width="16" height="16" /></a>
+            <a onclick="deletes(id)"><img src="../images/icon/del.png" width="16" height="16" /></a> 
+            </td>
+          </tr>
+          <tr>
+            <td>333333</td>
+            <td>zhangsan</td>
+            <td>333333</td>
+            <td>张三</td>
+            <td>管理人员</td>
+            <td>333333</td>
+            <td>48</td>
+            <td>山东济南历城区</td>
+            <td> 
+            <a onclick="modify(id)"><img src="../images/icon/edit.png" width="16" height="16" /></a>
+            <a onclick="deletes(id)"><img src="../images/icon/del.png" width="16" height="16" /></a> 
+            </td>
+          </tr>
+          <tr>
+            <td>444444</td>
+            <td>lisi</td>
+            <td>444444</td>
+            <td>李四</td>
+            <td>药剂师</td>
+            <td>444444</td>
+            <td>24</td>
+            <td>山东济南高新区</td>
+            <td> 
+            <a onclick="modify(id)"><img src="../images/icon/edit.png" width="16" height="16" /></a>
+            <a onclick="deletes(id)"><img src="../images/icon/del.png" width="16" height="16" /></a> 
+            </td>
+          </tr>
+          <tr>
+            <td>555555</td>
+            <td>wangwu</td>
+            <td>555555</td>
+            <td>王五</td>
+             <td>服务台员工</td>
+            <td>555555</td>
+            <td>23</td>
+            <td>山东济南槐荫区</td>
+            <td> 
+            <a onclick="modify(id)"><img src="../images/icon/edit.png" width="16" height="16" /></a>
+            <a onclick="deletes(id)"><img src="../images/icon/del.png" width="16" height="16" /></a> 
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!-- #widget -->
+  <div id="pagination" style="align:right;margin-top:-10px;">
+		<div id='project_pagination' class="pagination pagination-centered">
+			<div class="pagination">
+				<ul>
+					<li class="disabled"><a href="#">«</a></li>
+					<li class="active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">»</a></li>
+				</ul>
+				<ul>
+					<li><span>(1-10/38)</span></li>
+					<li><span>显示条数&nbsp;:&nbsp;</span></li>
+				</ul>
+				<ul>
+					<li class="active"><a href="#">10</a></li>
+					<li class=""><a href="#">30</a></li>
+					<li class=""><a href="#">50</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

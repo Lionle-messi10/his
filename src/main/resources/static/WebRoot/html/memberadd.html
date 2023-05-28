@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('tbody tr:odd').addClass("trLight");
+		$(".select-all").click(function(){
+			if($(this).attr("checked")){
+				$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", true);  
+					});
+				}else{
+					$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", false);  
+					});
+				}
+			});
+		});
+</script>
+<style type="text/css">
+body {
+	background:#FFF
+}
+</style>
+</head>
+
+<body>
+ <form method="post" action="memberadd.html" method="post" name="ThisForm">
+<div id="contentWrap">
+	<!--表格控件 -->
+  <div id="widget table-widget">
+    <div class="pageTitle">会员添加</div>
+      <div class="pageInfo">
+      <table>
+        <tr>
+          <td width="20%" align="right">会员名称</td>
+          <td width="20%"><input type="text" id="name" name="name"/></td>
+          <td width="20%" align="right">会员密码</td>
+          <td width="20%"><input type="password" id="password" name="password"/></td>
+       </tr>
+        <tr>
+          <td width="10%" align="right">身份证</td>
+          <td width="50%"><input type="text" id="credit" name="credit"/></td>
+        
+        	<td width="20%" align="right">电话</td>
+            <td width="50%"><input type="text" id="tel" name="tel"/></td>
+          </tr>
+        <tr>
+            <td width="10%" align="right">充值金额</td><!-- 编辑时卡余额不能修改 -->
+            <td width="50%"><input type="text" id="moneys" name="moneys"/></td>
+		
+            <td width="10%" align="right">充值方式</td>
+            <td width="50%">
+	          <select id="type" name="type" >
+	          	<option value="0">请选择</option>      
+	    		<option value="1">现金</option>      
+	    		<option value="2">刷卡</option>   
+	    		<option value="3">扫码支付</option>    
+	          </select>
+             </td>
+         </tr>
+        <tr>
+        	<td width="20%" align="right">年龄</td>
+            <td width="20%"><input type="text" id="age" name="age"/></td>
+        
+            <td width="10%" align="right">性别</td>
+            <td width="50%"><input type="text" id="sex" name="sex"/></td>
+        </tr>
+        <tr>
+        	<td width="20%" align="right">过敏史</td>
+            <td width="20%"><input type="text" id="anaphylaxis" name="anaphylaxis"/></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+          <td colspan="4" align="center"><input type="submit" value="确定"/> </td>
+        </tr>
+      </table>
+      </div>
+    </div>
+</div>
+</form>
+</body>
+</html>
+

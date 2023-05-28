@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+
+function deletes(id){
+ window.location.href="czlist.html";
+}
+
+	$(function(){
+		$('tbody tr:odd').addClass("trLight");
+		
+		$(".select-all").click(function(){
+			if($(this).attr("checked")){
+				$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", true);  
+					});
+				}else{
+					$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", false);  
+					});
+				}
+			});
+		
+		});
+</script>
+<style type="text/css">
+body {
+	background:#FFF
+}
+</style>
+</head>
+
+<body>
+<div id="contentWrap">
+	<!--表格控件 -->
+  <div id="widget table-widget">
+    <div class="pageTitle">处置信息</div>
+    <div class="pageColumn">
+      <div class="pageButton"></div>
+      <table>
+        <thead>
+          <th width="">id</th>
+          <th width="">挂号号</th>
+          <th width="">会员</th>
+          <th width="">时间</th>
+          <th width="">记录</th>
+            </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>20161223</td>
+            <td>李四</td>
+            <td>2018-2-1</td>
+            <td>已打针</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!-- #widget -->
+</div>
+</body>
+</html>
+

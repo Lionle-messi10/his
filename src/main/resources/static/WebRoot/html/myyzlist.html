@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<link href="../images/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+function deletes(id){
+ window.location.href="myyzhtml.html";
+}
+function ky(id){
+	 window.location.href="kylist.html";
+}
+$(function(){
+	$('tbody tr:odd').addClass("trLight");
+	$(".select-all").click(function(){
+		if($(this).attr("checked")){
+			$(".checkBox input[type=checkbox]").each(function(){
+				$(this).attr("checked", true);  
+				});
+			}else{
+				$(".checkBox input[type=checkbox]").each(function(){
+				$(this).attr("checked", false);  
+				});
+			}
+		});
+	});
+</script>
+<style type="text/css">
+body {
+	background:#FFF
+}
+</style>
+</head>
+
+<body>
+<div id="contentWrap">
+	<!--表格控件 -->
+  <div id="widget table-widget">
+    <div class="pageTitle">医生诊断管理</div>
+ <div class="querybody">
+	    <ul class="seachform">
+		    <li><label>挂号号</label><input name="" type="text" class="scinput" /></li>
+		    <li><label>会员ID</label><input name="" type="text" class="scinput" /></li>
+		    <li><label>诊断时间</label><input name="yztime" id="yztime" type="text" class="scinput" onClick="SelectDate(this.name)"/></li>
+		    <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+	    </ul>
+	 </div>
+     <div class="pageColumn">
+     <div class="pageButton"><a href="yzAdd.html"><img src="../images/t01.png" title="新增"/></a><span>医生诊断结果列表</span></div>
+      <table>
+        <thead>
+          <th width="">挂号号</th>
+          <th width="">会员ID</th>
+          <th width="">诊断人</th>
+          <th width="">诊断时间</th>
+          <th width="">诊断结果</th>
+          <th width="">药方</th>
+          <th width="10%">操作</th>
+          <th width="10%">开药信息</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>000001</td>
+            <td>222222</td>
+            <td>zhangsan</td>
+            <td>2018-2-1</td>
+            <td>疱疹</td>
+            <td>西药治疗：皮炎平</td>
+            <td><a onclick="deletes(id)"><img src="../images/icon/del.png" width="16" height="16" /></a></td>
+            <td><a onclick="ky(id)"><img src="../images/icon/edit2.png" width="16" height="16" /></a></td>
+          </tr>
+          <tr>
+            <td>000001</td>
+            <td>222222</td>
+            <td>zhangsan</td>
+            <td>2018-2-1</td>
+            <td>疱疹</td>
+            <td>西药治疗：皮炎平</td>
+            <td><a onclick="deletes(id)"><img src="../images/icon/del.png" width="16" height="16" /></a></td>
+            <td><a onclick="ky(id)"><img src="../images/icon/edit2.png" width="16" height="16" /></a></td>
+          </tr>
+          <tr>
+            <td>000001</td>
+            <td>222222</td>
+            <td>zhangsan</td>
+            <td>2018-2-1</td>
+            <td>疱疹</td>
+            <td>西药治疗：皮炎平</td>
+            <td><a onclick="deletes(id)"><img src="../images/icon/del.png" width="16" height="16" /></a></td>
+            <td><a onclick="ky(id)"><img src="../images/icon/edit2.png" width="16" height="16" /></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!-- #widget -->
+  <div id="pagination" style="align:right;margin-top:-10px;">
+		<div id='project_pagination' class="pagination pagination-centered">
+			<div class="pagination">
+				<ul>
+					<li class="disabled"><a href="#">«</a></li>
+					<li class="active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">»</a></li>
+				</ul>
+				<ul>
+					<li><span>(1-10/38)</span></li>
+					<li><span>显示条数&nbsp;:&nbsp;</span></li>
+				</ul>
+				<ul>
+					<li class="active"><a href="#">10</a></li>
+					<li class=""><a href="#">30</a></li>
+					<li class=""><a href="#">50</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+

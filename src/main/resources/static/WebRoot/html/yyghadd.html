@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/rl.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('tbody tr:odd').addClass("trLight");
+		$(".select-all").click(function(){
+			if($(this).attr("checked")){
+				$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", true);  
+					});
+				}else{
+					$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", false);  
+					});
+				}
+			});
+		});
+</script>
+<style type="text/css">
+body {
+	background:#FFF
+}
+</style>
+</head>
+
+<body>
+ <form method="post" action="ghlist.html" method="post" name="ThisForm">
+<div id="contentWrap">
+	<!--表格控件 -->
+  <div id="widget table-widget">
+    <div class="pageTitle">挂号添加</div>
+ 		<div class="pageInfo">
+		<table>
+			<tr>
+				<td width="20%" align="right">会员ID</td>
+				<td width="20%"><input type="text" id="mid" name="mid" value="123456" readonly="readonly"/></td>
+				<td width="10%" align="right">科室</td>
+				<td width="48%" ><select id="ks" name="ks">
+						<option value="0">请选择</option>      
+						<option value="儿科">儿科</option>
+						<option value="内科">内科</option>
+						<option value="外科">外科</option>
+				</select></td>
+				<td width="2%">&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="20%" align="right">医生</td>
+				<td width="48%" ><select id="userid" name="userid">
+						<option value="0">请选择</option>      
+						<option value="333333">张三</option>
+						<option value="333333">张三</option>
+						<option value="333333">张三</option>
+				</select></td>
+				<td width="20%" align="right">挂号费用</td>
+				<td width="20%"><input type="text" name="ghcost" id="ghcost" value="6" readonly="readonly"/></td>
+				<td width="2%">元</td>
+			</tr>
+			<tr>
+				<td width="10%" align="right">挂号时间</td>
+				<td width="48%" ><input type="text" name="ghtime" id="ghtime" onClick="SelectDate(this.name)"/></td>
+				<td width=""></td>
+				<td width=""></td>
+				<td width=""></td>
+			</tr>
+			<tr>
+				<td colspan="5" align="center"><input type="submit" value="确定" /></td>
+			</tr>
+		</table>
+	</div>
+  </div><!-- #widget -->
+</div>
+</form>
+</body>
+</html>

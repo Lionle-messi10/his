@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('tbody tr:odd').addClass("trLight");
+		
+		$(".select-all").click(function(){
+			if($(this).attr("checked")){
+				$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", true);  
+					});
+				}else{
+					$(".checkBox input[type=checkbox]").each(function(){
+					$(this).attr("checked", false);  
+					});
+				}
+			});
+		});
+</script>
+<style type="text/css">
+body {
+	background:#FFF
+}
+</style>
+</head>
+
+<body>
+ <form method="post" action="kylist.html" method="post" name="ThisForm">
+ <input type="hidden" id="yzid" name="yzid" value=""/>
+<div id="contentWrap">
+	<!--表格控件 -->
+  <div id="widget table-widget">
+    <div class="pageTitle">医生诊断药品添加</div>
+    <div class="pageInfo">
+		<table>
+			<tr>
+				<td width="20%" align="right">药品</td>
+				<td width="20%" ><select id="drugsid" name="drugsid">
+						<option value="123456">皮炎平</option>
+						<option value="123456">皮炎平</option>
+						<option value="123456">皮炎平</option>
+				</select></td>
+				<td width="10%" align="right">数量</td>
+				<td width="50%"><input type="text" id="num" name="num" /></td>
+			</tr>
+			<tr>
+				<td width="20%" align="right">描述</td>
+				<td width="80%" colspan="3"><textarea rows="5"  id="descs"
+						name="descs" style="width:99%"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="4" align="center"><input type="submit" value="确定" /></td>
+			</tr>
+		</table>
+	</div>
+  </div><!-- #widget -->
+</div>
+</form>
+</body>
+</html>
+

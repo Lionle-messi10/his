@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8">
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <title>登录</title>
+
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+    <style>
+        .body {
+            min-width: 1366px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login" id="loginApp">
+    <div class="login-box" style="width: 400px">
+     <img src="../resources/backend/images/login/login-l.png" alt="">
+        <div class="login-form" style="width: 100%;border-radius:8px">
+            <el-form ref="loginForm" :model="formData" :rules="rules">
+                <div class="login-form-title">
+                    <h1>登录</h1>
+                </div>
+                <el-form-item prop="userName">
+                    <el-input v-model="formData.userName" type="text" auto-complete="off" placeholder="账号"
+                              maxlength="20" prefix-icon="iconfont icon-user"/>
+                </el-form-item>
+                <el-form-item prop="Password">
+                    <el-input v-model="formData.password" type="password" placeholder="密码"
+                              prefix-icon="iconfont icon-lock" maxlength="20"
+                              @keyup.enter.native="Login"/>
+                </el-form-item>
+                <el-form-item style="width:100%;">
+                    <el-button class="login-btn" size="medium" type="primary" style="width:100%;"
+                               @click="Login">
+                        <span>登录</span>
+                       <span v-else>登录中...</span>
+                    </el-button>
+                </el-form-item>
+            </el-form>
+        </div>
+    </div>
+</div>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+
+<script>
+    var vue = new Vue({
+        el: '#loginApp',
+        computed: {
+            loginRules() {
+                const validateUsername = (rule, value, callback) => {
+                    if (value.length < 1) {
+                        callback(new Error('请输入用户名'))
+                    } else {
+                        callback()
+                    }
+                }
+                const validatePassword = (rule, value, callback) => {
+                    if (value.length < 4) {
+                        callback(new Error('密码必须在4位以上'))
+                    } else {
+                        callback()
+                    }
+                }
+                return {
+                    'username': [{'validator': validateUsername, 'trigger': 'blur'}],
+                    'password': [{'validator': validatePassword, 'trigger': 'blur'}]
+                }
+            }
+        },
+        data: {
+            pagination: {},
+            dataList: [],
+            formData: {},
+            rules: {
+                username: [{required: true, message: '账号为必填项', trigger: 'blur'}],
+                password: [{required: true, message: '密码为必填项', trigger: 'blur'}]
+            },
+        },
+
+        //钩子函数，Vue对象初始化完成后自动执行
+        created() {
+        },
+
+        methods: {
+            Login() {
+                axios.post("/users/login", this.formData).then((res) => {
+                    console.log(res.data.code)
+                    if (res.data.code === 1) {
+                        this.$message.success("登录成功");
+                        window.location.replace("/static/WebRoot/element/useradmin.html");
+                    }
+                    if (res.data.code === 2){
+                        this.$message.success("登录成功");
+                        window.location.replace("/static/WebRoot/element/userIndex.html");
+                    }
+                    if (res.data.code === 3){
+                        this.$message.success("登录成功");
+                        window.location.replace("/static/WebRoot/element/doctorIndex.html");
+                    }
+                    else   if (res.data.code === 0){
+
+                        this.$message.error("登录失败");
+                    }
+                }).finally(() => {
+
+                });
+            },
+        }
+    })
+</script>
+
+</body>
+
+</html>
